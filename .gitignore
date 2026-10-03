@@ -16,3 +16,6 @@ __pycache__/
 
 # Local test screenshots (kept ones live in screenshots/)
 /*.png
+
+# Internal design notes
+docs/
