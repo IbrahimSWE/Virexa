@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>فاحص التعارضات الدوائية</title>
+<style>
+  body {
+    font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+    margin: 0;
+  }
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 28px;
+    width: 100%;
+    max-width: 480px;
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0 0 20px;
+    text-align: center;
+    color: #1f2937;
+  }
+  label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #374151;
+  }
+  input {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    box-sizing: border-box;
+  }
+  button {
+    width: 100%;
+    padding: 12px;
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+  }
+  button:hover { background: #1d4ed8; }
+  button:disabled { background: #93c5fd; cursor: default; }
+
+  .btn-add {
+    background: #fff;
+    color: #2563eb;
+    border: 1px dashed #93c5fd;
+    margin-bottom: 16px;
+  }
+  .btn-add:hover { background: #eff6ff; }
+  .btn-add:disabled { background: #f3f4f6; color: #9ca3af; border-color: #d1d5db; }
+
+  .hours-wrapper {
+    display: none;
+    margin-top: -10px;
+  }
+  .hours-wrapper.visible { display: block; }
+  .hours-wrapper label {
+    font-size: 12.5px;
+    color: #6b7280;
+  }
+  .hours-input { max-width: 160px; }
+
+  #result { margin-top: 20px; }
+  .result-box {
+    border-radius: 8px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .result-box + .result-box { margin-top: 12px; }
+  .no-match {
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+    color: #065f46;
+  }
+  .match { border: 1px solid; }
+  .sev-high   { background: #fef2f2; border-color: #fecaca; color: #991b1b; }
+  .sev-moderate { background: #fffbeb; border-color: #fde68a; color: #92400e; }
+  .sev-low    { background: #eff6ff; border-color: #bfdbfe; color: #1e40af; }
+  .time-adjusted { background: #f8fafc; border-color: #cbd5e1; color: #475569; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: bold;
+    margin-inline-end: 6px;
+  }
+  .badge-time { background: #dcfce7; color: #166534; }
+  .row { margin-bottom: 8px; }
+  .matched-note {
+    font-size: 12px;
+    color: #9ca3af;
+    font-style: italic;
+    margin-top: -2px;
+  }
+  .error { color: #b91c1c; font-size: 14px; margin-top: 10px; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>فاحص التعارضات الدوائية</h1>
+    <form id="checkForm">
+      <div id="drugFields"></div>
+      <button type="button" id="addDrugBtn" class="btn-add">+ إضافة دواء</button>
+      <button type="submit" id="submitBtn">تحقق من التعارضات</button>
+    </form>
+    <div id="result"></div>
+  </div>
+
+<script>
+const MAX_DRUGS = 8;
+const drugFields = document.getElementById('drugFields');
+const addDrugBtn = document.getElementById('addDrugBtn');
+const form = document.getElementById('checkForm');
+const resultDiv = document.getElementById('result');
+const submitBtn = document.getElementById('submitBtn');
+
+const severityLabel = { high: "خطورة عالية", moderate: "خطورة متوسطة", low: "خطورة منخفضة" };
+const typeLabel = { pharmacodynamic: "ديناميكي دوائي", pharmacokinetic: "حركي دوائي" };
+
+const ORDINAL_LABELS = ["الأول", "الثاني", "الثالث", "الرابع", "الخامس", "السادس", "السابع", "الثامن"];
+let drugCount = 0;
+
+function addDrugField() {
+  if (drugCount >= MAX_DRUGS) return;
+
+  const index = drugCount;
+  const wrapper = document.createElement('div');
+
+  const label = document.createElement('label');
+  label.setAttribute('for', `drug_${index}`);
+  label.textContent = `اسم الدواء ${ORDINAL_LABELS[index] || index + 1}`;
+
+  const input = document.createElement('input');
+  input.id = `drug_${index}`;
+  input.className = 'drug-input';
+  input.placeholder = index === 0 ? 'مثال: Aspirin' : (index === 1 ? 'مثال: Warfarin' : 'اسم الدواء');
+  if (index < 2) input.required = true;
+
+  const hoursWrapper = document.createElement('div');
+  hoursWrapper.className = 'hours-wrapper';
+
+  const hoursLabel = document.createElement('label');
+  hoursLabel.setAttribute('for', `hours_${index}`);
+  hoursLabel.textContent = 'منذ كم ساعة تم تناوله؟';
+
+  const hoursInput = document.createElement('input');
+  hoursInput.type = 'number';
+  hoursInput.min = '0';
+  hoursInput.step = 'any';
+  hoursInput.id = `hours_${index}`;
+  hoursInput.className = 'hours-input';
+  hoursInput.placeholder = '0';
+
+  hoursWrapper.appendChild(hoursLabel);
+  hoursWrapper.appendChild(hoursInput);
+
+  input.addEventListener('input', () => {
+    hoursWrapper.classList.toggle('visible', input.value.trim().length > 0);
+  });
+
+  wrapper.appendChild(label);
+  wrapper.appendChild(input);
+  wrapper.appendChild(hoursWrapper);
+  drugFields.appendChild(wrapper);
+
+  drugCount++;
+  addDrugBtn.disabled = drugCount >= MAX_DRUGS;
+}
+
+addDrugField();
+addDrugField();
+
+addDrugBtn.addEventListener('click', addDrugField);
+
+function renderInteraction(item) {
+  const isTimeAdjusted = item.time_adjusted === true;
+  const cardClass = isTimeAdjusted ? 'time-adjusted' : ('sev-' + item.severity);
+  const severityBadge = isTimeAdjusted
+    ? `<span class="badge badge-time">⏱ الخطر منخفض حالياً بسبب مرور الوقت</span>`
+    : `<span class="badge">${severityLabel[item.severity] || item.severity}</span>`;
+
+  const matchedNotes = item.matched_names
+    ? Object.values(item.matched_names).map(note => `<div class="matched-note">${note}</div>`).join('')
+    : '';
+
+  return `
+    <div class="result-box match ${cardClass}">
+      <div class="row">${severityBadge}
+      <span class="badge">${typeLabel[item.interaction_type] || item.interaction_type}</span></div>
+      <div class="row"><strong>${item.drug_a} + ${item.drug_b}</strong></div>
+      ${matchedNotes}
+      <div class="row">${item.description}</div>
+      <div class="row"><strong>التوصية:</strong> ${item.recommendation}</div>
+    </div>`;
+}
+
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const drugs = Array.from(drugFields.children).map(wrapper => {
+    const nameInput = wrapper.querySelector('.drug-input');
+    const hoursInput = wrapper.querySelector('.hours-input');
+    const name = nameInput.value.trim();
+    if (!name) return null;
+    const hoursRaw = hoursInput.value.trim();
+    return { name, hours_since_taken: hoursRaw === '' ? 0 : parseFloat(hoursRaw) };
+  }).filter(Boolean);
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "جارٍ التحقق...";
+  resultDiv.innerHTML = "";
+
+  try {
+    const res = await fetch('/check-interaction', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ drugs })
+    });
+
+    if (!res.ok) {
+      resultDiv.innerHTML = `<div class="error">حدث خطأ في الطلب (${res.status}). تأكد من إدخال دوائين على الأقل.</div>`;
+      return;
+    }
+
+    const data = await res.json();
+
+    if (data.message) {
+      resultDiv.innerHTML = `<div class="result-box no-match">${data.message}</div>`;
+    } else if (data.interactions_found) {
+      resultDiv.innerHTML = data.interactions_found.map(renderInteraction).join('');
+    }
+  } catch (err) {
+    resultDiv.innerHTML = `<div class="error">تعذر الاتصال بالخادم. تأكد أنه يعمل.</div>`;
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "تحقق من التعارضات";
+  }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,262 @@
+{
+  "drugs": {
+    "Aspirin": {
+      "half_life_hours": 0.3
+    },
+    "Warfarin": {
+      "half_life_hours": 40
+    },
+    "Ibuprofen": {
+      "half_life_hours": 2
+    },
+    "Lisinopril": {
+      "half_life_hours": 12
+    },
+    "Simvastatin": {
+      "half_life_hours": 3
+    },
+    "Clarithromycin": {
+      "half_life_hours": 5
+    },
+    "Fluconazole": {
+      "half_life_hours": 30
+    },
+    "Sildenafil": {
+      "half_life_hours": 4
+    },
+    "Nitroglycerin": {
+      "half_life_hours": 0.05
+    },
+    "Phenelzine": {
+      "half_life_hours": 2
+    },
+    "Fluoxetine": {
+      "half_life_hours": 96
+    },
+    "Metformin": {
+      "half_life_hours": 6
+    },
+    "Iodinated Contrast Media": {
+      "half_life_hours": 2
+    },
+    "Digoxin": {
+      "half_life_hours": 40
+    },
+    "Amiodarone": {
+      "half_life_hours": 1400
+    },
+    "Clopidogrel": {
+      "half_life_hours": 6
+    },
+    "Omeprazole": {
+      "half_life_hours": 1
+    },
+    "Methotrexate": {
+      "half_life_hours": 6
+    },
+    "Lithium": {
+      "half_life_hours": 24
+    },
+    "Hydrochlorothiazide": {
+      "half_life_hours": 10
+    },
+    "Spironolactone": {
+      "half_life_hours": 1.4
+    },
+    "Theophylline": {
+      "half_life_hours": 8
+    },
+    "Ciprofloxacin": {
+      "half_life_hours": 4
+    },
+    "Tramadol": {
+      "half_life_hours": 6
+    },
+    "Sertraline": {
+      "half_life_hours": 26
+    },
+    "Metronidazole": {
+      "half_life_hours": 8
+    },
+    "Verapamil": {
+      "half_life_hours": 6
+    },
+    "Carbamazepine": {
+      "half_life_hours": 12
+    },
+    "Ethinylestradiol": {
+      "half_life_hours": 15
+    },
+    "Allopurinol": {
+      "half_life_hours": 2
+    },
+    "Azathioprine": {
+      "half_life_hours": 5
+    },
+    "Propranolol": {
+      "half_life_hours": 4
+    }
+  },
+  "interactions": [
+    {
+      "drug_a": "Aspirin",
+      "drug_b": "Warfarin",
+      "interaction_type": "pharmacodynamic",
+      "severity": "high",
+      "description": "كلا الدوايين يؤثران على الإرقاء (hemostasis) بآليتين مختلفتين، مما يزيد بشكل كبير من خطر النزيف الهضمي والنزيف الداخلي.",
+      "recommendation": "تجنب الجمع بينهما إلا تحت إشراف طبي دقيق مع مراقبة INR ووظائف التخثر."
+    },
+    {
+      "drug_a": "Ibuprofen",
+      "drug_b": "Lisinopril",
+      "interaction_type": "pharmacodynamic",
+      "severity": "moderate",
+      "description": "مضادات الالتهاب غير الستيرويدية (NSAIDs) تقلل من فعالية خافضات ضغط الدم من فئة مثبطات الإنزيم المحول للأنجيوتنسين وقد تسبب ضعفاً في وظائف الكلى.",
+      "recommendation": "استشر الطبيب قبل الاستخدام المتزامن، ويفضل مراقبة ضغط الدم ووظائف الكلى."
+    },
+    {
+      "drug_a": "Simvastatin",
+      "drug_b": "Clarithromycin",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "الكلاريثروميسين يثبط إنزيم CYP3A4 مما يرفع تركيز السيمفاستاتين في الدم بشكل كبير ويزيد خطر التسمم العضلي (rhabdomyolysis).",
+      "recommendation": "يجب تجنب الجمع بينهما أو إيقاف الستاتين مؤقتاً أثناء العلاج بالمضاد الحيوي، بعد استشارة الصيدلي أو الطبيب."
+    },
+    {
+      "drug_a": "Warfarin",
+      "drug_b": "Fluconazole",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "الفلوكونازول يثبط إنزيم CYP2C9 المسؤول عن استقلاب الوارفارين، مما يرفع مستوى INR ويزيد خطر النزيف.",
+      "recommendation": "مراقبة INR بشكل متكرر عند بدء أو إيقاف الفلوكونازول، وقد يلزم تعديل جرعة الوارفارين تحت إشراف طبي."
+    },
+    {
+      "drug_a": "Sildenafil",
+      "drug_b": "Nitroglycerin",
+      "interaction_type": "pharmacodynamic",
+      "severity": "high",
+      "description": "الجمع بين مثبطات PDE5 والنترات يسبب انخفاضاً حاداً وخطيراً في ضغط الدم قد يهدد الحياة.",
+      "recommendation": "يمنع استخدامهما معاً إطلاقاً؛ يجب إخبار الطبيب بأي استخدام حديث لأي من الدوائين."
+    },
+    {
+      "drug_a": "Phenelzine",
+      "drug_b": "Fluoxetine",
+      "interaction_type": "pharmacodynamic",
+      "severity": "high",
+      "description": "الجمع بين مثبطات MAO ومثبطات استرداد السيروتونين الانتقائية (SSRIs) قد يسبب متلازمة السيروتونين الخطيرة.",
+      "recommendation": "يجب ترك فترة زمنية كافية (غسيل دوائي) بين إيقاف أحد الدوائين وبدء الآخر، تحت إشراف طبيب نفسي أو مختص."
+    },
+    {
+      "drug_a": "Metformin",
+      "drug_b": "Iodinated Contrast Media",
+      "interaction_type": "pharmacokinetic",
+      "severity": "moderate",
+      "description": "مادة التباين اليودية المستخدمة في الأشعة قد تسبب قصوراً كلوياً حاداً يؤدي لتراكم الميتفورمين وخطر الحماض اللبني.",
+      "recommendation": "يوصى بإيقاف الميتفورمين مؤقتاً قبل وبعد إجراء الأشعة بالصبغة، حسب توجيهات الطبيب."
+    },
+    {
+      "drug_a": "Digoxin",
+      "drug_b": "Amiodarone",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "الأميودارون يثبط ناقلات الأدوية (P-glycoprotein) ويقلل من تصفية الديجوكسين، مما يرفع مستواه في الدم وقد يسبب تسمماً قلبياً.",
+      "recommendation": "يلزم تقليل جرعة الديجوكسين ومراقبة مستواه في الدم عند بدء الأميودارون، بإشراف طبيب القلب."
+    },
+    {
+      "drug_a": "Warfarin",
+      "drug_b": "Amiodarone",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "الأميودارون يثبط استقلاب الوارفارين عبر الكبد مما يرفع INR بشكل ملحوظ ويزيد خطر النزيف.",
+      "recommendation": "تقليل جرعة الوارفارين ومراقبة INR بشكل متكرر عند إضافة الأميودارون، تحت إشراف طبي."
+    },
+    {
+      "drug_a": "Clopidogrel",
+      "drug_b": "Omeprazole",
+      "interaction_type": "pharmacokinetic",
+      "severity": "moderate",
+      "description": "الأوميبرازول يثبط إنزيم CYP2C19 اللازم لتفعيل الكلوبيدوقرل، مما قد يقلل من فعاليته المضادة للصفائح الدموية.",
+      "recommendation": "يفضل استخدام مثبط مضخة بروتون بديل (مثل بانتوبرازول) أو استشارة الطبيب قبل الجمع بينهما."
+    },
+    {
+      "drug_a": "Methotrexate",
+      "drug_b": "Ibuprofen",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "مضادات الالتهاب غير الستيرويدية تقلل من التصفية الكلوية للميثوتريكسات مما يرفع تركيزه في الدم ويزيد خطر التسمم النخاعي والكبدي.",
+      "recommendation": "تجنب الجمع بينهما خاصة مع جرعات الميثوتريكسات العالية، واستشر الطبيب لاختيار مسكن بديل."
+    },
+    {
+      "drug_a": "Lithium",
+      "drug_b": "Hydrochlorothiazide",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "مدرات البول الثيازيدية تقلل من إفراز الليثيوم الكلوي مما يرفع مستواه في الدم ويزيد خطر التسمم بالليثيوم.",
+      "recommendation": "مراقبة مستوى الليثيوم في الدم بشكل متكرر عند بدء مدرات البول الثيازيدية، وتعديل الجرعة حسب الحاجة."
+    },
+    {
+      "drug_a": "Lisinopril",
+      "drug_b": "Spironolactone",
+      "interaction_type": "pharmacodynamic",
+      "severity": "moderate",
+      "description": "الجمع بين مثبطات الإنزيم المحول للأنجيوتنسين ومدرات البول المحافظة على البوتاسيوم يزيد خطر فرط بوتاسيوم الدم.",
+      "recommendation": "مراقبة مستوى البوتاسيوم ووظائف الكلى بشكل دوري عند استخدامهما معاً."
+    },
+    {
+      "drug_a": "Theophylline",
+      "drug_b": "Ciprofloxacin",
+      "interaction_type": "pharmacokinetic",
+      "severity": "moderate",
+      "description": "السيبروفلوكساسين يثبط إنزيم CYP1A2 مما يرفع مستوى الثيوفيلين في الدم وقد يسبب أعراض تسمم مثل الغثيان والتشنجات.",
+      "recommendation": "مراقبة مستوى الثيوفيلين وتعديل الجرعة عند الحاجة لاستخدام السيبروفلوكساسين."
+    },
+    {
+      "drug_a": "Tramadol",
+      "drug_b": "Sertraline",
+      "interaction_type": "pharmacodynamic",
+      "severity": "moderate",
+      "description": "كلاهما يرفع نشاط السيروتونين، والجمع بينهما يزيد خطر الإصابة بمتلازمة السيروتونين.",
+      "recommendation": "استخدام الجرعة الأقل الفعالة مع المراقبة الدقيقة لأعراض متلازمة السيروتونين، أو استشارة الطبيب لبديل آخر."
+    },
+    {
+      "drug_a": "Warfarin",
+      "drug_b": "Metronidazole",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "الميترونيدازول يثبط إنزيم CYP2C9 مما يبطئ استقلاب الوارفارين ويرفع INR بشكل كبير، مما يزيد خطر النزيف.",
+      "recommendation": "مراقبة INR عن كثب أثناء وبعد فترة العلاج بالميترونيدازول، وتعديل جرعة الوارفارين عند الحاجة."
+    },
+    {
+      "drug_a": "Verapamil",
+      "drug_b": "Simvastatin",
+      "interaction_type": "pharmacokinetic",
+      "severity": "moderate",
+      "description": "الفيراباميل يثبط إنزيم CYP3A4 مما يرفع تركيز السيمفاستاتين في الدم ويزيد خطر اعتلال العضلات.",
+      "recommendation": "يفضل تخفيض جرعة الستاتين أو اختيار ستاتين بديل لا يتم استقلابه عبر CYP3A4."
+    },
+    {
+      "drug_a": "Carbamazepine",
+      "drug_b": "Ethinylestradiol",
+      "interaction_type": "pharmacokinetic",
+      "severity": "moderate",
+      "description": "الكاربامازيبين محفز إنزيمي قوي يسرّع استقلاب موانع الحمل الهرمونية، مما يقلل من فعاليتها ويزيد خطر الحمل غير المخطط له.",
+      "recommendation": "استخدام وسيلة منع حمل إضافية أو بديلة أثناء العلاج بالكاربامازيبين، بعد استشارة الطبيب."
+    },
+    {
+      "drug_a": "Allopurinol",
+      "drug_b": "Azathioprine",
+      "interaction_type": "pharmacokinetic",
+      "severity": "high",
+      "description": "الألوبورينول يثبط إنزيم xanthine oxidase المسؤول عن تكسير الآزاثيوبرين، مما يرفع مستواه بشكل خطير ويسبب تثبيط نخاع العظم.",
+      "recommendation": "يجب تقليل جرعة الآزاثيوبرين بنسبة كبيرة (عادة إلى الربع) عند الجمع بينهما، تحت إشراف طبي متخصص."
+    },
+    {
+      "drug_a": "Propranolol",
+      "drug_b": "Verapamil",
+      "interaction_type": "pharmacodynamic",
+      "severity": "high",
+      "description": "الجمع بين حاصرات بيتا وحاصرات قنوات الكالسيوم غير ثنائية الهيدروبيريدين يزيد خطر بطء القلب الشديد وحصار العقدة الأذينية البطينية وقصور القلب.",
+      "recommendation": "تجنب الجمع بينهما عند وجود ضعف في وظيفة القلب، ومراقبة معدل ضربات القلب وضغط الدم عند الاستخدام المشترك."
+    }
+  ]
+}
